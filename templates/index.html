@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+<script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+</head>
+
+
+
+<body class="bg-dark">
+
+    <div class="container">
+        <div class="jumbotron">
+          <h1>Text Summarization Model</h1>
+          <p>Summarise Text by entering paragraphs into the below box </p>
+          <p>(Enter atleast 200 characters with punctuations)</p>
+        </div>
+    </div>
+
+    <div class="container">
+      <form method="POST">
+        <div class="form-group">
+          <textarea type="text" class="form-control" placeholder="Enter text here" name="Textarea" id="Textarea" rows="5" value="{{request.form.Textarea}}"></textarea>
+        </div>
+          <button  disabled='disabled' type="submit" name="submitting" id="submitting" class="btn btn-primary btn-lg btn-block enableOnInput" disabled='disabled'>Summarise!!</button>
+      </form>
+    </div>
+<br>
+    <div class="container">
+      {% if textprint %}
+          <div class="jumbotron">
+            <h3>Original Text is as follows</h3>
+            <p>{{textprint}}</p>
+          </div>
+      {% endif %}
+    </div>
+
+    <div class="container">
+      {% if newprinttext %}
+          <div class="jumbotron">
+            <h3>Summarised Text is as follows</h3>
+            <p>{{newprinttext}}</p>
+          </div>
+      {% endif %}
+    </div>
+
+
+<script type="text/javascript">
+  $('Textarea').keyup(function ()
+  {
+    if ($(this).val().length <= 200)
+    {
+        $('.enableOnInput').prop('disabled', true);
+    }
+    else
+    {
+        //If there is text in the input, then enable the button
+        $('.enableOnInput').prop('disabled', false);
+    }
+  });
+</script>
+
+
+
+</body>
+</html>
